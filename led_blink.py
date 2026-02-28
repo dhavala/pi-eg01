@@ -38,13 +38,14 @@ while True:
             raise ValueError("Times must be non-negative")
         break
     except ValueError as e:
-        print(f"Invalid input: {e}. Example: 1,1 or 0.5,0.5")
+        print("Invalid input: {}. Example: 1,1 or 0.5,0.5".format(e))
 
 # Convert seconds to milliseconds (stored internally)
 on_ms = int(on_seconds * 1000)
 off_ms = int(off_seconds * 1000)
 
-print(f"Blinking: ON for {on_seconds}s ({on_ms}ms), OFF for {off_seconds}s ({off_ms}ms). Press Q + Enter to stop.")
+print("Blinking: ON for {}s ({}ms), OFF for {}s ({}ms). Press Q + Enter to stop.".format(
+    on_seconds, on_ms, off_seconds, off_ms))
 
 stop_event = threading.Event()
 
