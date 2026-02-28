@@ -36,6 +36,8 @@ Raspberry Pi 3          Breadboard
 
 ## Usage
 
+### Basic LED control (`led_control.py`)
+
 Run with `sudo` (required for GPIO access):
 
 ```bash
@@ -47,6 +49,17 @@ Then:
 - Type `0` and Enter → LED turns **OFF**
 - Type `q` and Enter (or Ctrl+C) → Exit and cleanup
 
+### Blinking LED (`led_blink.py`)
+
+```bash
+sudo python3 led_blink.py
+```
+
+- Enter on and off cycle times in seconds, comma-separated (e.g., `1,1` or `0.5,0.5`)
+- The LED blinks: on for the first value, off for the second, in a loop
+- Times are converted to milliseconds internally
+- Press `Q` and Enter to stop
+
 ## Pin Configuration
 
-The default GPIO pin is **BCM 17** (Physical Pin 11). To use a different pin, edit `LED_PIN` at the top of `led_control.py`.
+The default GPIO pin is **BCM 17** (Physical Pin 11). To use a different pin, edit `LED_PIN` at the top of `led_control.py` or `led_blink.py`.
