@@ -1,0 +1,3 @@
+# RPi.GPIO is pre-installed on Raspberry Pi OS.
+# Use this only if installing via pip (e.g., for a virtualenv).
+RPi.GPIO>=0.7.0
