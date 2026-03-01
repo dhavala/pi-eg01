@@ -57,7 +57,8 @@ def wait_for_quit():
     stop_event.set()
 
 
-quit_thread = threading.Thread(target=wait_for_quit, daemon=True)
+quit_thread = threading.Thread(target=wait_for_quit)
+quit_thread.setDaemon(True)
 quit_thread.start()
 
 try:
