@@ -1,3 +1,7 @@
 # RPi.GPIO is pre-installed on Raspberry Pi OS.
 # Use this only if installing via pip (e.g., for a virtualenv).
 RPi.GPIO>=0.7.0
+
+# For ultrasound_proximity_alarm.py (Doppler-effect siren demo)
+numpy>=1.19.0
+pyaudio>=0.2.11

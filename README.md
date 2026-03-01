@@ -1,6 +1,6 @@
 # Raspberry Pi 3 LED Control
 
-Python applications for LED control via GPIO: manual on/off, configurable blink, and ultrasound proximity (HC-SR04) triggered LED.
+Python applications for LED control via GPIO: manual on/off, configurable blink, ultrasound proximity (HC-SR04) triggered LED, and a proximity alarm with amplitude-varying siren (Doppler-effect demo).
 
 ## Hardware Wiring
 
@@ -33,7 +33,9 @@ Raspberry Pi 3          Breadboard
 - 330Ω or 1kΩ resistor
 - Breadboard and jumper wires
 - RPi.GPIO (pre-installed on Raspberry Pi OS)
-- HC-SR04 ultrasonic sensor (for `ultrasound_led.py` only)
+- HC-SR04 ultrasonic sensor (for `ultrasound_led.py` and `ultrasound_proximity_alarm.py`)
+- External speaker (for `ultrasound_proximity_alarm.py` — 3.5mm jack or HDMI audio)
+- numpy, pyaudio (for `ultrasound_proximity_alarm.py`: `pip install numpy pyaudio`)
 
 ## Usage
 
@@ -84,6 +86,29 @@ sudo python3 ultrasound_led.py
 - Runs until Ctrl+C
 - Continuously measures distance and toggles LED based on 50 cm threshold
 - Change `DISTANCE_THRESHOLD_CM` in the script to adjust the trigger distance
+
+### Ultrasound Proximity Alarm with Doppler Demo (`ultrasound_proximity_alarm.py`)
+
+Extends the ultrasound script to play an **ambulance-like siren** through an external speaker. As an object gets **closer** to the sensor, the siren **amplitude (loudness) increases**—demonstrating the Doppler-effect concept (perceived intensity rises as a source approaches).
+
+**Hardware:**
+- Same as `ultrasound_led.py` (HC-SR04, LED)
+- **External speaker** connected to the Pi 3.5mm jack or HDMI audio output
+
+**Install dependencies:**
+```bash
+pip install numpy pyaudio
+# On Raspberry Pi OS, you may also need:
+sudo apt install python3-pyaudio portaudio19-dev
+```
+
+```bash
+sudo python3 ultrasound_proximity_alarm.py
+```
+
+- Runs until Ctrl+C
+- Siren plays when object is within 50 cm; volume increases as distance decreases
+- LED turns ON when object is within threshold (same as `ultrasound_led.py`)
 
 ## Pin Configuration
 
