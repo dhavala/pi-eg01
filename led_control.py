@@ -1,8 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 """
 Simple LED control for Raspberry Pi 3.
 Type 1 to turn LED on, 0 to turn off. Type q to quit.
 """
+
+from __future__ import print_function
 
 import RPi.GPIO as GPIO
 
@@ -14,12 +16,12 @@ GPIO.setwarnings(False)
 GPIO.setup(LED_PIN, GPIO.OUT)
 
 print("LED Control - Enter 1 (on), 0 (off), or q (quit)")
-print("Note: Run with sudo for GPIO access: sudo python3 led_control.py")
+print("Note: Run with sudo for GPIO access: sudo python2 led_control.py")
 print("-" * 40)
 
 try:
     while True:
-        user_input = input("> ").strip().lower()
+        user_input = raw_input("> ").strip().lower()
         if user_input == "q":
             break
         if user_input == "1":

@@ -44,7 +44,7 @@ Raspberry Pi 3          Breadboard
 Run with `sudo` (required for GPIO access):
 
 ```bash
-sudo python3 led_control.py
+sudo python2 led_control.py
 ```
 
 Then:
