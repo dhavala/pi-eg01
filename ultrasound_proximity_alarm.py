@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 """
 Ultrasound Proximity Alarm with Doppler-Effect Demo
 
@@ -14,6 +14,8 @@ audio output (3.5mm jack or HDMI) for the alarm sound.
 Hardware: HC-SR04, LED, external speaker via Pi audio output
 """
 
+from __future__ import print_function
+
 import RPi.GPIO as GPIO
 import time
 import threading
@@ -23,7 +25,7 @@ try:
     import pyaudio
 except ImportError:
     print("Required: pip install numpy pyaudio")
-    print("On Raspberry Pi: sudo apt install python3-pyaudio; pip install numpy")
+    print("On Raspberry Pi: sudo apt install python-pyaudio; pip install numpy")
     exit(1)
 
 # Pin configuration (BCM)
@@ -136,7 +138,8 @@ def audio_thread_entry():
         state = [0.0, 0]  # [phase_radians, sample_counter]
         while not _stop_audio:
             chunk, _, _ = generate_siren_chunk(state, CHUNK_SIZE)
-            stream.write(chunk.tobytes())
+            # tobytes() in numpy 1.9+; tostring() for older numpy on Python 2
+            stream.write(chunk.tobytes() if hasattr(chunk, 'tobytes') else chunk.tostring())
         stream.stop_stream()
         stream.close()
     except Exception as e:
@@ -160,11 +163,12 @@ def main():
     print("Connect external speaker to Pi 3.5mm jack or HDMI")
     print("Press Ctrl+C to stop.")
     print("-" * 50)
-    print("Run with sudo for GPIO: sudo python3 ultrasound_proximity_alarm.py")
+    print("Run with sudo for GPIO: sudo python2 ultrasound_proximity_alarm.py")
     print("-" * 50)
 
     # Start audio thread
-    audio_thread = threading.Thread(target=audio_thread_entry, daemon=True)
+    audio_thread = threading.Thread(target=audio_thread_entry)
+    audio_thread.setDaemon(True)
     audio_thread.start()
 
     try:

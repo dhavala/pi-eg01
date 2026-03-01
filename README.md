@@ -99,11 +99,11 @@ Extends the ultrasound script to play an **ambulance-like siren** through an ext
 ```bash
 pip install numpy pyaudio
 # On Raspberry Pi OS, you may also need:
-sudo apt install python3-pyaudio portaudio19-dev
+sudo apt install python-pyaudio portaudio19-dev
 ```
 
 ```bash
-sudo python3 ultrasound_proximity_alarm.py
+sudo python2 ultrasound_proximity_alarm.py
 ```
 
 - Runs until Ctrl+C
