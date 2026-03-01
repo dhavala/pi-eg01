@@ -55,7 +55,7 @@ Then:
 ### Blinking LED (`led_blink.py`)
 
 ```bash
-sudo python3 led_blink.py
+sudo python2 led_blink.py
 ```
 
 - Enter on and off cycle times in seconds, comma-separated (e.g., `1,1` or `0.5,0.5`)
